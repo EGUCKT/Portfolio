@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EGUCKT - Atharv Sharma</title>
+    <link rel="icon" type="image/x-icon" href="Images/pfp.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Dotted Grid Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, #888888 1.5px, transparent 1.5px);
+            background-size: 25px 25px;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        /* Ambient gradient overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.06) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 3D Floating Navigation Dock */
+        .nav-dock {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #fcfcfd 0%, #f8f8fa 15%, #f3f4f6 30%, #eeeff2 45%, #e9eaed 60%, #e4e5e8 75%, #dee0e3 90%, #e2e3e6 100%);
+            padding: 16px 24px;
+            border-radius: 50px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12),
+                        0 8px 16px rgba(0, 0, 0, 0.10),
+                        0 16px 32px rgba(0, 0, 0, 0.08),
+                        inset 0 2px 1px rgba(255, 255, 255, 0.7),
+                        inset 0 -2px 6px rgba(0, 0, 0, 0.10);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .nav-dock:hover {
+            padding: 16px 32px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08),
+                        0 6px 12px rgba(0, 0, 0, 0.12),
+                        0 12px 24px rgba(0, 0, 0, 0.14),
+                        inset 0 2px 2px rgba(255, 255, 255, 0.8),
+                        inset 0 -3px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .nav-item {
+            color: #656565;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 510;
+            padding: 10px 16px;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            letter-spacing: 0.45px;
+            white-space: nowrap;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.22), 0 -1px 0 rgba(255, 255, 255, 0.65);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #1a1a1a;
+            font-weight: 680;
+            transform: translateY(-1.5px);
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 -1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-item:hover {
+            color: #3a3a3a;
+            transform: translateY(-0.5px);
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 80px 20px 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            scroll-margin-top: 0px;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 24px;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #666;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        /* Skill Pills */
+        .skill-pill {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            transition: all 0.3s ease;
+        }
+
+        .skill-pill:hover {
+            background: #1a1a1a;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Stats Box */
+        .stat-box {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero .cta-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .cta-btn {
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-primary {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .cta-primary:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-secondary {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            color: #1a1a1a;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 32px 32px 32px 32px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08),
+                        0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12),
+                        0 4px 16px rgba(0, 0, 0, 0.06);
+            border-color: rgba(255, 255, 255, 1);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1/1;
+            object-fit: contain;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .project-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .project-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #1a1a1a;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #333;
+            transform: scale(1.05);
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 48px;
+        }
+
+        /* Resume/Achievements */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .achievement-card {
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .achievement-card img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .achievement-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .achievement-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .about-bio {
+            grid-column: 1 / -1;
+        }
+
+        .about-bio p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #444;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .social-card {
+            text-align: center;
+        }
+
+        .social-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .social-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #1a1a1a;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .social-icons a {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: #1a1a1a;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+            filter: grayscale(1);
+            transition: filter 0.3s ease;
+        }
+
+        .social-icons a:hover img {
+            filter: grayscale(0) invert(1) brightness(10);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px 120px;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .nav-dock {
+                flex-wrap: wrap;
+                justify-content: center;
+                bottom: 20px;
+                max-width: 90%;
+            }
+
+            .projects-grid,
+            .achievements-grid,
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hide sections initially for smooth reveal */
+        section {
+            opacity: 0;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Infinite Carousel Styles */
+        .carousel-container {
+            position: relative;
+            width: 100vw;
+            overflow: hidden;
+            padding: 20px 0;
+            background: transparent;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 32px;
+            animation: scroll 50s linear infinite;
+            width: max-content;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .carousel-item {
+            flex-shrink: 0;
+            width: 350px;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            display: block;
+        }
+
+        /* Shadow overlays for infinite effect */
+        .carousel-shadow-left {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 200px;
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 1) 0%, 
+                rgba(255, 255, 255, 0.95) 20%,
+                rgba(255, 255, 255, 0.7) 50%,
+                rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .carousel-shadow-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 200px;
+            background: linear-gradient(270deg, 
+                rgba(255, 255, 255, 1) 0%, 
+                rgba(255, 255, 255, 0.95) 20%,
+                rgba(255, 255, 255, 0.7) 50%,
+                rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 3D Navigation Dock -->
+    <nav class="nav-dock">
+        <a href="#home" class="nav-item active" data-section="home">Home</a>
+        <a href="#projects" class="nav-item" data-section="projects">Projects</a>
+        <a href="#resume" class="nav-item" data-section="resume">Resume</a>
+        <a href="#about" class="nav-item" data-section="about">About</a>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="hero">
+        <h1>EGUCKT</h1>
+        <p>Hey! I'm <strong>Atharv Sharma</strong>, an 18-year-old B.Tech student passionate about technology, gaming, and creating amazing digital experiences.</p>
+        
+        <!-- Skills Pills -->
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 24px; max-width: 600px;">
+            <span class="skill-pill">AI & ML</span>
+            <span class="skill-pill">Android Dev</span>
+            <span class="skill-pill">Video Editing</span>
+            <span class="skill-pill">Content Creation</span>
+            <span class="skill-pill">Game Development</span>
+        </div>
+        
+        <!-- Stats -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; max-width: 500px; width: 100%;">
+            <div class="stat-box">
+                <div class="stat-number">3+</div>
+                <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Certificates</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">2</div>
+                <div class="stat-label">YT Channels</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">Explore my fun apps and creative experiments</p>
+        
+        <div class="projects-grid">
+            <div class="glass-card project-card">
+                <img src="Images/app_preview.jpg" alt="Atharv is guessing" onerror="this.style.display='none'">
+                <h3>Atharv is Guessing</h3>
+                <p>This app can guess the number you are thinking of by asking a few simple questions. Made using simple C++ logic!</p>
+                <a href="Atharv is guessing.apk" class="download-btn" download>Download App</a>
+            </div>
+
+            <div class="glass-card project-card">
+                <img src="Images/Chatur_preview.jpg" alt="Chatur" onerror="this.style.display='none'">
+                <h3>Chatur</h3>
+                <p>Ask a question, and Chatur will hit back with cheeky, clever replies. Whether it's love, exams, or just random fun – Chatur always has something smart to say!</p>
+                <a href="Chatur.apk" class="download-btn" download>Download App</a>
+            </div>
+
+            <div class="glass-card project-card">
+                <img src="Images/moodbeats_preview.jpg" alt="MoodBeats" onerror="this.style.display='none'">
+                <h3>MoodBeats</h3>
+                <p>Click a selfie, and MoodBeats reads your mood like magic — then drops songs that fit your feels perfectly. Sad, hyped, chill, or angry, MoodBeats always knows what you need to hear.</p>
+                <a href="#" class="download-btn" onclick="alert('Coming Soon!'); return false;">View Project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume">
+        <h2 class="section-title">Resume & Achievements</h2>
+        <p class="section-subtitle">My professional journey and certifications</p>
+        
+        <!-- Resume Card -->
+        <div class="glass-card" style="margin-bottom: 48px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px;">
+                <div>
+                    <h3 style="font-size: 32px; margin-bottom: 8px; color: #1a1a1a;">Atharv Sharma</h3>
+                    <p style="color: #666; margin-bottom: 20px;">
+                        📞 +91-7400941247<br>
+                        📧 atharvs278@gmail.com<br>
+                        🌐 <a href="https://linkedin.com/in/atharv-sharma787878" target="_blank" style="color: #1a1a1a; text-decoration: none;">LinkedIn</a><br>
+                        📍 Mhow, MP
+                    </p>
+                    
+                    <h4 style="font-size: 20px; margin: 24px 0 12px; color: #1a1a1a;">Professional Summary</h4>
+                    <p style="color: #666; line-height: 1.6;">B.Tech student in AI & Machine Learning with hands-on experience in Android app development, AI automation, and generative AI. Built projects like an offline AI voice assistant and AI-powered workflows.</p>
+                </div>
+
+                <div>
+                    <h4 style="font-size: 20px; margin-bottom: 12px; color: #1a1a1a;">Skills</h4>
+                    <ul style="color: #666; line-height: 1.8; list-style-position: inside;">
+                        <li><strong>Programming:</strong> C/C++, Python, HTML, CSS, JavaScript</li>
+                        <li><strong>AI & Tools:</strong> Generative AI, Google Cloud Vertex AI, TensorFlow</li>
+                        <li><strong>Software:</strong> Android Studio, Git, VS Code, Blender</li>
+                        <li><strong>Creative:</strong> Adobe Premiere Pro, CapCut, FL Studio</li>
+                    </ul>
+                    
+                    <h4 style="font-size: 20px; margin: 24px 0 12px; color: #1a1a1a;">Education</h4>
+                    <p style="color: #666; line-height: 1.6; margin-bottom: 12px;">
+                        <strong>B.Tech - AI & Machine Learning</strong><br>
+                        Sushila Devi Bansal College of Engineering, Indore | Expected 2028
+                    </p>
+                    
+                    <h4 style="font-size: 20px; margin: 24px 0 12px; color: #1a1a1a;">Languages</h4>
+                    <p style="color: #666;">English, Hindi, Japanese (Basic - Hiragana)</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="font-size: 36px; text-align: center; margin-bottom: 32px; color: #1a1a1a;">Certifications</h3>
+        
+        <div class="achievements-grid" id="cert-grid">
+
+            <a class="glass-card achievement-card">
+                <img src="Images/IOT.png" alt="IOT" onerror="this.style.display='none'">
+                <h3>Introduction to Internet of Things</h3>
+                <p>I mastered how IoT devices collect data, connect through networks, and power automation. The course also gave me practical knowledge of IoT security and real-world use cases.</p>
+            </a>
+
+            <a class="glass-card achievement-card">
+                <img src="Images/LTE.jpg" alt="LTE" onerror="this.style.display='none'">
+                <h3>Leadership and Team Effectiveness</h3>
+                <p>I learned essential principles of leadership, motivation, and team dynamics. The course strengthened my ability to guide teams, resolve conflicts, and drive effective collaboration.</p>
+            </a>
+
+            <a href="https://learn.saylor.org/pluginfile.php/1/tool_certificate/issues/1741061012/6941276983AS.pdf" target="_blank" class="glass-card achievement-card">
+                <img src="Images/ESL001.png" alt="ESL001" onerror="this.style.display='none'">
+                <h3>Elementary English as a Second Language</h3>
+                <p>Improved grammar, vocabulary, reading, and pronunciation. Enhanced my English communication skills significantly.</p>
+            </a>
+
+            <a href="https://learn.saylor.org/pluginfile.php/1/tool_certificate/issues/1741067244/7915885907AS.pdf" target="_blank" class="glass-card achievement-card">
+                <img src="Images/PHIL102.png" alt="PHIL102" onerror="this.style.display='none'">
+                <h3>Critical Thinking and Logic</h3>
+                <p>Explored philosophical concepts, critical thinking, and ethical reasoning. Learned to analyze arguments and think logically.</p>
+            </a>
+
+            <a href="https://learn.saylor.org/pluginfile.php/1/tool_certificate/issues/1733640242/4748461916AS.pdf" target="_blank" class="glass-card achievement-card">
+                <img src="Images/PRDV213.png" alt="PRDV213" onerror="this.style.display='none'">
+                <h3>Group Communication</h3>
+                <p>Developed key communication skills to improve writing, speaking, and interpersonal interactions professionally.</p>
+            </a>
+
+            <a href="https://learn.saylor.org/pluginfile.php/1/tool_certificate/issues/1734448192/1702940342AS.pdf" target="_blank" class="glass-card achievement-card">
+                <img src="Images/PRDV008.png" alt="PRDV008" onerror="this.style.display='none'">
+                <h3>Preparing & Delivering Presentations</h3>
+                <p>Learned time management strategies and effective presentation techniques to communicate ideas clearly.</p>
+            </a>
+
+            <a href="https://learn.saylor.org/pluginfile.php/1/tool_certificate/issues/1734249331/3933855569AS.pdf" target="_blank" class="glass-card achievement-card">
+                <img src="Images/PRDV212.png" alt="PRDV212" onerror="this.style.display='none'">
+                <h3>Interpersonal Communication</h3>
+                <p>Mastered essential leadership and team management skills, including effective decision-making and problem-solving.</p>
+            </a>
+        </div>
+
+        <!-- Infinite Carousel Section -->
+        <div style="margin-top: 80px; margin-bottom: 40px; margin-left: -20px; margin-right: -20px;">
+            <h3 style="font-size: 32px; text-align: center; margin-bottom: 48px; color: #1a1a1a; padding: 0 20px;">More Achievements</h3>
+            
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <!-- First set of items -->
+                    <div class="carousel-item">
+                        <img src="Images/Ach1.png" alt="Achievement 1" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img src="Images/Ach2.png" alt="Achievement 2" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img src="Images/Ach3.png" alt="Achievement 3" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img src="Images/Ach4.png" alt="Achievement 4" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img src="Images/Ach5.png" alt="Achievement 5" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img src="Images/Ach6.png" alt="Achievement 6" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img src="Images/Ach7.png" alt="Achievement 7" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="carousel-item">
+                        <img src="Images/Ach1.png" alt="Achievement 1" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img src="Images/Ach2.png" alt="Achievement 2" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img src="Images/Ach3.png" alt="Achievement 3" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img src="Images/Ach4.png" alt="Achievement 4" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img src="Images/Ach5.png" alt="Achievement 5" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img src="Images/Ach6.png" alt="Achievement 6" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <img src="Images/Ach7.png" alt="Achievement 7" class="carousel-image" onerror="this.style.display='none'">
+                    </div>
+                </div>
+                
+                <!-- Shadow overlays for infinite effect -->
+                <div class="carousel-shadow-left"></div>
+                <div class="carousel-shadow-right"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">Get to know me better</p>
+        
+        <div class="about-content">
+            <div class="glass-card about-bio">
+                <p>Hey there! I'm <strong>Atharv Sharma</strong>, an 18-year-old currently pursuing <strong>B.Tech in Computer Science & Engineering (AIML)</strong>. I have a strong passion for technology and gaming, and I love experimenting with new ideas and expanding my knowledge. Video editing is something I really enjoy, and I've spent a lot of time creating content for YouTube and social media. Besides tech, I'm also into fitness and working out, constantly pushing myself to be the best version of myself. Whether it's coding, editing, self-improvement or diving into the latest tech trends, I'm always looking for ways to challenge myself and build something exciting!</p>
+            </div>
+
+            <div class="glass-card social-card">
+                <h3>🎮 Gaming Channel</h3>
+                <p>High-quality gaming videos across different genres – horror, adventure, action, and hardcore rage games!</p>
+                <a href="https://www.youtube.com/@EGUCKTgames" target="_blank" class="social-link">Watch Now →</a>
+            </div>
+
+            <div class="glass-card social-card">
+                <h3>🎬 Main YouTube</h3>
+                <p>Experiments, gaming, unboxing, comedy, tutorials, music, edits, vlogs, and animation videos.</p>
+                <a href="https://www.youtube.com/@EGUCKT" target="_blank" class="social-link">Subscribe →</a>
+            </div>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://www.youtube.com/" target="_blank" title="YouTube">
+                <img src="Images/youtube.png" alt="YouTube" onerror="this.parentElement.style.display='none'">
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn">
+                <img src="Images/linkedin.png" alt="LinkedIn" onerror="this.parentElement.style.display='none'">
+            </a>
+            <a href="https://discord.com/" target="_blank" title="Discord">
+                <img src="Images/discord.png" alt="Discord" onerror="this.parentElement.style.display='none'">
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                <img src="Images/instagram.png" alt="Instagram" onerror="this.parentElement.style.display='none'">
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 EGUCKT. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll and active state management
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all items
+                document.querySelectorAll('.nav-item').forEach(nav => {
+                    nav.classList.remove('active');
+                });
+                
+                // Add active class to clicked item
+                this.classList.add('active');
+                
+                // Smooth scroll to section
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Update active nav on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
