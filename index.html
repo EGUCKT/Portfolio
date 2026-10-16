@@ -148,10 +148,8 @@
 
         .glass-surface--fallback {
             background: rgba(255, 255, 255, 0.22);
-            background: light-dark(
-                hsl(0 0% 100% / calc(0.12 + var(--glass-frost, 0.1) * 0.5)),
-                hsl(0 0% 100% / calc(0.04 + var(--glass-frost, 0.1) * 0.3))
-            );
+            background: light-dark(hsl(0 0% 100% / calc(0.12 + var(--glass-frost, 0.1) * 0.5)),
+                    hsl(0 0% 100% / calc(0.04 + var(--glass-frost, 0.1) * 0.3)));
             -webkit-backdrop-filter: blur(14px) saturate(calc(var(--glass-saturation, 1.2) * 1.4)) brightness(1.05);
             backdrop-filter: blur(14px) saturate(calc(var(--glass-saturation, 1.2) * 1.4)) brightness(1.05);
             box-shadow:
@@ -174,25 +172,21 @@
         }
 
         .glass-surface__sheen {
-            background: linear-gradient(
-                135deg,
-                rgba(255, 255, 255, 0.45) 0%,
-                transparent 42%,
-                transparent 64%,
-                rgba(255, 255, 255, 0.18) 100%
-            );
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.45) 0%,
+                    transparent 42%,
+                    transparent 64%,
+                    rgba(255, 255, 255, 0.18) 100%);
         }
 
         .glass-surface__rim {
             padding: 2.5px;
             box-sizing: border-box;
-            background: linear-gradient(
-                150deg,
-                rgba(255, 255, 255, 0.75),
-                rgba(255, 255, 255, 0.15) 45%,
-                rgba(255, 255, 255, 0.08) 60%,
-                rgba(255, 255, 255, 0.45)
-            );
+            background: linear-gradient(150deg,
+                    rgba(255, 255, 255, 0.75),
+                    rgba(255, 255, 255, 0.15) 45%,
+                    rgba(255, 255, 255, 0.08) 60%,
+                    rgba(255, 255, 255, 0.45));
             -webkit-mask:
                 linear-gradient(#000 0 0) content-box,
                 linear-gradient(#000 0 0);
@@ -452,27 +446,28 @@
             pointer-events: none;
         }
 
-        	.project-card .click-hint {
-		position: absolute;
-		top: 20px;
-		right: 20px;
-		background: rgba(0, 0, 0, 0.7);
-		color: white;
-		font-size: 12px;
-		padding: 6px 14px;
-		border-radius: 20px;
-		font-weight: 600;
-		opacity: 1; /* always visible */
-		transform: none;
-		transition: all 0.3s ease;
-		pointer-events: auto;
-		z-index: 5;
-	}
+        .project-card .click-hint {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 12px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            opacity: 1;
+            /* always visible */
+            transform: none;
+            transition: all 0.3s ease;
+            pointer-events: auto;
+            z-index: 5;
+        }
 
-	.project-card:hover .click-hint {
-		opacity: 1;
-		transform: none;
-	}
+        .project-card:hover .click-hint {
+            opacity: 1;
+            transform: none;
+        }
 
         .project-card.show-tech .click-hint {
             opacity: 0;
@@ -863,22 +858,27 @@
     <nav class="nav-dock glass-surface glass-surface--fallback" id="navDock">
         <svg class="glass-surface__filter" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <filter id="glass-filter-nav" color-interpolation-filters="sRGB" x="0%" y="0%" width="100%" height="100%">
-                    <feImage id="fe-image-map" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map" />
+                <filter id="glass-filter-nav" color-interpolation-filters="sRGB" x="0%" y="0%" width="100%"
+                    height="100%">
+                    <feImage id="fe-image-map" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none"
+                        result="map" />
 
-                    <feDisplacementMap id="redchannel" in="SourceGraphic" in2="map" result="dispRed" scale="-180" xChannelSelector="R" yChannelSelector="G" />
+                    <feDisplacementMap id="redchannel" in="SourceGraphic" in2="map" result="dispRed" scale="-180"
+                        xChannelSelector="R" yChannelSelector="G" />
                     <feColorMatrix in="dispRed" type="matrix" values="1 0 0 0 0
                             0 0 0 0 0
                             0 0 0 0 0
                             0 0 0 1 0" result="red" />
 
-                    <feDisplacementMap id="greenchannel" in="SourceGraphic" in2="map" result="dispGreen" scale="-170" xChannelSelector="R" yChannelSelector="G" />
+                    <feDisplacementMap id="greenchannel" in="SourceGraphic" in2="map" result="dispGreen" scale="-170"
+                        xChannelSelector="R" yChannelSelector="G" />
                     <feColorMatrix in="dispGreen" type="matrix" values="0 0 0 0 0
                             0 1 0 0 0
                             0 0 0 0 0
                             0 0 0 1 0" result="green" />
 
-                    <feDisplacementMap id="bluechannel" in="SourceGraphic" in2="map" result="dispBlue" scale="-160" xChannelSelector="R" yChannelSelector="G" />
+                    <feDisplacementMap id="bluechannel" in="SourceGraphic" in2="map" result="dispBlue" scale="-160"
+                        xChannelSelector="R" yChannelSelector="G" />
                     <feColorMatrix in="dispBlue" type="matrix" values="0 0 0 0 0
                             0 0 0 0 0
                             0 0 1 0 0
@@ -946,139 +946,157 @@
         <h2 class="section-title">Projects</h2>
         <p class="section-subtitle">Explore my fun apps and creative experiments</p>
 
-     <div class="projects-grid">
-    <div class="glass-card project-card" onclick="this.classList.toggle('show-tech')">
-        <div class="click-hint">Click for more details</div>
-        <div class="card-content">
-            <img src="Images/ss_preview.jpeg" alt="SafarSathi" onerror="this.style.display='none'">
-            <h3>SafarSathi</h3>
-            <p>Start a journey, and SafarSathi uses AI to analyze street lighting and crime density to guide you
-                along the safest path — while tracking your location, detecting screams, and auto-notifying
-                emergency contacts if something goes wrong. Day or night, SafarSathi is your personal security
-                guard on the road.</p>
-            <a href="https://github.com/EGUCKT/SafarSathi" target="_blank" class="download-btn" onclick="event.stopPropagation()" download>View Project</a>
-        </div>
-        <div class="tech-desc">
-            <h3 style="margin-bottom: 12px; color: #1a1a1a;">SafarSathi</h3>
-            <ul style="color: #1a1a1a; font-size: 14px; line-height: 1.6; list-style-position: inside; font-weight: 500;">
-                <li>Intelligent Safety Navigation System (Indore & Mhow Focus)</li>
-                <li>Background audio scream detection</li>
-                <li>Firebase real-time location sharing</li>
-                <li>Automated emergency alerts</li>
-                <li>Flutter, FlaskAPI</li>
-                <li>SQLAlchemy (ORM), GeoAlchemy2</li>
-                <li>PostgreSQL + PostGIS extension</li>
-                <li>OSMnx, NetworkX, Shapely, GeoPy</li>
-                <li>XGBoost, Scikit-learn, Pandas, NumPy</li>
-                <li>Local emergency contacts integration</li>
-                <li>GIS-based street lighting & crime data analysis</li>
-                <li>Allows crowdsourced incident reporting</li>
-                <li>Real-time reports dashboard for Admin</li>
-                <li>Real-time alerts on user's registered emergency contacts</li>
-            </ul>
-            <a href="https://www.linkedin.com/posts/atharv-sharma787878_bgi-hackathon-2026-was-hell-of-an-experience-ugcPost-7462856557605703680-KxIj/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFLJ4EUBc7wq9NIj2HDD8t8rUPLCPlLNwWQ" target="_blank" class="download-btn" onclick="event.stopPropagation()" style="margin-top: 20px;" download>Watch demo video</a>
-        </div>
-    </div>
+        <div class="projects-grid">
+            <div class="glass-card project-card" onclick="this.classList.toggle('show-tech')">
+                <div class="click-hint">Click for more details</div>
+                <div class="card-content">
+                    <img src="Images/ss_preview.jpeg" alt="SafarSathi" onerror="this.style.display='none'">
+                    <h3>SafarSathi</h3>
+                    <p>Start a journey, and SafarSathi uses AI to analyze street lighting and crime density to guide you
+                        along the safest path — while tracking your location, detecting screams, and auto-notifying
+                        emergency contacts if something goes wrong. Day or night, SafarSathi is your personal security
+                        guard on the road.</p>
+                    <a href="https://github.com/EGUCKT/SafarSathi" target="_blank" class="download-btn"
+                        onclick="event.stopPropagation()" download>View Project</a>
+                </div>
+                <div class="tech-desc">
+                    <h3 style="margin-bottom: 12px; color: #1a1a1a;">SafarSathi</h3>
+                    <ul
+                        style="color: #1a1a1a; font-size: 14px; line-height: 1.6; list-style-position: inside; font-weight: 500;">
+                        <li>Intelligent Safety Navigation System (Indore & Mhow Focus)</li>
+                        <li>Background audio scream detection</li>
+                        <li>Firebase real-time location sharing</li>
+                        <li>Automated emergency alerts</li>
+                        <li>Flutter, FlaskAPI</li>
+                        <li>SQLAlchemy (ORM), GeoAlchemy2</li>
+                        <li>PostgreSQL + PostGIS extension</li>
+                        <li>OSMnx, NetworkX, Shapely, GeoPy</li>
+                        <li>XGBoost, Scikit-learn, Pandas, NumPy</li>
+                        <li>Local emergency contacts integration</li>
+                        <li>GIS-based street lighting & crime data analysis</li>
+                        <li>Allows crowdsourced incident reporting</li>
+                        <li>Real-time reports dashboard for Admin</li>
+                        <li>Real-time alerts on user's registered emergency contacts</li>
+                    </ul>
+                    <a href="https://www.linkedin.com/posts/atharv-sharma787878_bgi-hackathon-2026-was-hell-of-an-experience-ugcPost-7462856557605703680-KxIj/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFLJ4EUBc7wq9NIj2HDD8t8rUPLCPlLNwWQ"
+                        target="_blank" class="download-btn" onclick="event.stopPropagation()" style="margin-top: 20px;"
+                        download>Watch demo video</a>
+                </div>
+            </div>
 
-    <div class="glass-card project-card" onclick="this.classList.toggle('show-tech')">
-        <div class="click-hint">Click for more details</div>
-        <div class="card-content">
-            <img src="Images/DimagX_preview.png" alt="DimagX" onerror="this.style.display='none'">
-            <h3>DimagX</h3>
-            <p>Think of a person, a number, or ask a question — DimagX twists logic, timing, and psychology to
-                feel like real intelligence playing with your mind.</p>
-            <a href="https://drive.google.com/file/d/1UWSPIZV6V15IM-pf4F7VaRDjHFSofw_K/view?usp=sharing" target="_blank" class="download-btn" onclick="event.stopPropagation()" download>Download for Windows</a>
-        </div>
-        <div class="tech-desc">
-            <h3 style="margin-bottom: 12px; color: #1a1a1a;">DimagX</h3>
-            <ul style="color: #1a1a1a; font-size: 14px; line-height: 1.6; list-style-position: inside; font-weight: 500;">
-                <li>Windows desktop application</li>
-                <li>C++17</li>
-                <li>SFML</li>
-                <li>CMake</li>
-                <li>Input parsing</li>
-                <li>Buffered keystroke redirection</li>
-                <li>Custom binary tree</li>
-                <li>Psychology & input pattern analysis</li>
-                <li>Probability-based simulation</li>
-                <li>Custom timing & delay mechanics</li>
-                <li>Windows anti-debugging protection via IsDebuggerPresent</li>
-            </ul>
-            <a href="https://www.linkedin.com/posts/atharv-sharma787878_cpp-sfml-gamedev-activity-7465364507515764736-uy90?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFLJ4EUBc7wq9NIj2HDD8t8rUPLCPlLNwWQ" target="_blank" class="download-btn" onclick="event.stopPropagation()" style="margin-top: 20px;" download>Watch demo video</a>
-        </div>
-    </div>
+            <div class="glass-card project-card" onclick="this.classList.toggle('show-tech')">
+                <div class="click-hint">Click for more details</div>
+                <div class="card-content">
+                    <img src="Images/DimagX_preview.png" alt="DimagX" onerror="this.style.display='none'">
+                    <h3>DimagX</h3>
+                    <p>Think of a person, a number, or ask a question — DimagX twists logic, timing, and psychology to
+                        feel like real intelligence playing with your mind.</p>
+                    <a href="https://drive.google.com/file/d/1UWSPIZV6V15IM-pf4F7VaRDjHFSofw_K/view?usp=sharing"
+                        target="_blank" class="download-btn" onclick="event.stopPropagation()" download>Download for
+                        Windows</a>
+                </div>
+                <div class="tech-desc">
+                    <h3 style="margin-bottom: 12px; color: #1a1a1a;">DimagX</h3>
+                    <ul
+                        style="color: #1a1a1a; font-size: 14px; line-height: 1.6; list-style-position: inside; font-weight: 500;">
+                        <li>Windows desktop application</li>
+                        <li>C++17</li>
+                        <li>SFML</li>
+                        <li>CMake</li>
+                        <li>Input parsing</li>
+                        <li>Buffered keystroke redirection</li>
+                        <li>Custom binary tree</li>
+                        <li>Psychology & input pattern analysis</li>
+                        <li>Probability-based simulation</li>
+                        <li>Custom timing & delay mechanics</li>
+                        <li>Windows anti-debugging protection via IsDebuggerPresent</li>
+                    </ul>
+                    <a href="https://www.linkedin.com/posts/atharv-sharma787878_cpp-sfml-gamedev-activity-7465364507515764736-uy90?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFLJ4EUBc7wq9NIj2HDD8t8rUPLCPlLNwWQ"
+                        target="_blank" class="download-btn" onclick="event.stopPropagation()" style="margin-top: 20px;"
+                        download>Watch demo video</a>
+                </div>
+            </div>
 
-    <div class="glass-card project-card" onclick="this.classList.toggle('show-tech')">
-        <div class="click-hint">Click for more details</div>
-        <div class="card-content">
-            <img src="Images/moodbeats_preview.jpg" alt="MoodBeats" onerror="this.style.display='none'">
-            <h3>MoodBeats</h3>
-            <p>Click a selfie, and MoodBeats reads your mood like magic — then drops songs that fit your feels
-                perfectly. Sad, hyped, chill, or angry, MoodBeats always knows what you need to hear.</p>
-            <a href="https://huggingface.co/spaces/EGUCKT/MoodBeats" target="_blank" class="download-btn" onclick="event.stopPropagation()" download>Try It Now</a>
-        </div>
-        <div class="tech-desc">
-            <h3 style="margin-bottom: 12px; color: #1a1a1a;">MoodBeats</h3>
-            <ul style="color: #1a1a1a; font-size: 14px; line-height: 1.6; list-style-position: inside; font-weight: 500;">
-                <li>Artificial Intelligence-powered Facial Emotion-based Music Recommendation Web App</li>
-                <li>Python, Flask, OpenCV, PIL</li>
-                <li>Dynamic emotion-to-music mapping</li>
-                <li>React, Framer Motion</li>
-                <li>TensorFlow, Keras, DeepFace</li>
-                <li>Accepts either real-time base64 image pings or user-uploaded photos</li>
-                <li>User Mood Profiling: Saves historical detections inside session cookies</li>
-                <li>Generates a weekly mood trend graph</li>
-            </ul>
-            <a href="https://github.com/EGUCKT/MoodBeats" target="_blank" class="download-btn" onclick="event.stopPropagation()" style="margin-top: 20px;" download>View Project</a>
-        </div>
-    </div>
+            <div class="glass-card project-card" onclick="this.classList.toggle('show-tech')">
+                <div class="click-hint">Click for more details</div>
+                <div class="card-content">
+                    <img src="Images/moodbeats_preview.jpg" alt="MoodBeats" onerror="this.style.display='none'">
+                    <h3>MoodBeats</h3>
+                    <p>Click a selfie, and MoodBeats reads your mood like magic — then drops songs that fit your feels
+                        perfectly. Sad, hyped, chill, or angry, MoodBeats always knows what you need to hear.</p>
+                    <a href="https://huggingface.co/spaces/EGUCKT/MoodBeats" target="_blank" class="download-btn"
+                        onclick="event.stopPropagation()" download>Try It Now</a>
+                </div>
+                <div class="tech-desc">
+                    <h3 style="margin-bottom: 12px; color: #1a1a1a;">MoodBeats</h3>
+                    <ul
+                        style="color: #1a1a1a; font-size: 14px; line-height: 1.6; list-style-position: inside; font-weight: 500;">
+                        <li>Artificial Intelligence-powered Facial Emotion-based Music Recommendation Web App</li>
+                        <li>Python, Flask, OpenCV, PIL</li>
+                        <li>Dynamic emotion-to-music mapping</li>
+                        <li>React, Framer Motion</li>
+                        <li>TensorFlow, Keras, DeepFace</li>
+                        <li>Accepts either real-time base64 image pings or user-uploaded photos</li>
+                        <li>User Mood Profiling: Saves historical detections inside session cookies</li>
+                        <li>Generates a weekly mood trend graph</li>
+                    </ul>
+                    <a href="https://github.com/EGUCKT/MoodBeats" target="_blank" class="download-btn"
+                        onclick="event.stopPropagation()" style="margin-top: 20px;" download>View Project</a>
+                </div>
+            </div>
 
-    <div class="glass-card project-card" onclick="this.classList.toggle('show-tech')">
-        <div class="click-hint">Click for more details</div>
-        <div class="card-content">
-            <img src="Images/Chatur_preview.jpg" alt="Chatur" onerror="this.style.display='none'">
-            <h3>Chatur</h3>
-            <p>Ask a question, and Chatur will hit back with cheeky, clever replies. Whether it's love, exams,
-                or just random fun – Chatur always has something smart to say!</p>
-            <a href="https://drive.google.com/file/d/1YtbG_n1GwMjFEMBcZZunsEHIyid-0pTq/view?usp=sharing" target="_blank" class="download-btn" onclick="event.stopPropagation()" download>Download for Android</a>
-        </div>
-        <div class="tech-desc">
-            <h3 style="margin-bottom: 12px; color: #1a1a1a;">Chatur</h3>
-            <ul style="color: #1a1a1a; font-size: 14px; line-height: 1.6; list-style-position: inside; font-weight: 500;">
-                <li>Native Android Application (Companion)</li>
-                <li>SpeechRecognizer</li>
-                <li>Custom rule-based intent matching</li>
-                <li>Kotlin, Jetpack Compose</li>
-                <li>Material 3</li>
-                <li>Gradle</li>
-                <li>Offline keyword extraction logic</li>
-                <li>Custom responsive UI components</li>
-                <li>Vosk Android SDK</li>
-                <li>English, Hindi & Hinglish Support</li>
-            </ul>
-        </div>
-    </div>
+            <div class="glass-card project-card" onclick="this.classList.toggle('show-tech')">
+                <div class="click-hint">Click for more details</div>
+                <div class="card-content">
+                    <img src="Images/Chatur_preview.jpg" alt="Chatur" onerror="this.style.display='none'">
+                    <h3>Chatur</h3>
+                    <p>Ask a question, and Chatur will hit back with cheeky, clever replies. Whether it's love, exams,
+                        or just random fun – Chatur always has something smart to say!</p>
+                    <a href="https://drive.google.com/file/d/1YtbG_n1GwMjFEMBcZZunsEHIyid-0pTq/view?usp=sharing"
+                        target="_blank" class="download-btn" onclick="event.stopPropagation()" download>Download for
+                        Android</a>
+                </div>
+                <div class="tech-desc">
+                    <h3 style="margin-bottom: 12px; color: #1a1a1a;">Chatur</h3>
+                    <ul
+                        style="color: #1a1a1a; font-size: 14px; line-height: 1.6; list-style-position: inside; font-weight: 500;">
+                        <li>Native Android Application (Companion)</li>
+                        <li>SpeechRecognizer</li>
+                        <li>Custom rule-based intent matching</li>
+                        <li>Kotlin, Jetpack Compose</li>
+                        <li>Material 3</li>
+                        <li>Gradle</li>
+                        <li>Offline keyword extraction logic</li>
+                        <li>Custom responsive UI components</li>
+                        <li>Vosk Android SDK</li>
+                        <li>English, Hindi & Hinglish Support</li>
+                    </ul>
+                </div>
+            </div>
 
-    <div class="glass-card project-card" onclick="this.classList.toggle('show-tech')">
-        <div class="click-hint">Click for more details</div>
-        <div class="card-content">
-            <img src="Images/app_preview.jpg" alt="Atharv is guessing" onerror="this.style.display='none'">
-            <h3>Atharv is Guessing</h3>
-            <p>This app can guess the number you are thinking of by asking a few simple questions. Made using
-                simple C++ logic!</p>
-            <a href="Atharv is guessing.apk" class="download-btn" onclick="event.stopPropagation()" download>Download for Android</a>
+            <div class="glass-card project-card" onclick="this.classList.toggle('show-tech')">
+                <div class="click-hint">Click for more details</div>
+                <div class="card-content">
+                    <img src="Images/app_preview.jpg" alt="Atharv is guessing" onerror="this.style.display='none'">
+                    <h3>Atharv is Guessing</h3>
+                    <p>This app can guess the number you are thinking of by asking a few simple questions. Made using
+                        simple C++ logic!</p>
+                    <a href="Atharv is guessing.apk" class="download-btn" onclick="event.stopPropagation()"
+                        download>Download for Android</a>
+                </div>
+                <div class="tech-desc">
+                    <h3 style="margin-bottom: 12px; color: #1a1a1a;">Atharv is Guessing</h3>
+                    <ul
+                        style="color: #1a1a1a; font-size: 14px; line-height: 1.6; list-style-position: inside; font-weight: 500;">
+                        <li>Built entirely in C++</li>
+                        <li>Implements binary search algorithms</li>
+                        <li>Uses decision trees to guess numbers</li>
+                        <li>Custom terminal-based logic</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="tech-desc">
-            <h3 style="margin-bottom: 12px; color: #1a1a1a;">Atharv is Guessing</h3>
-            <ul style="color: #1a1a1a; font-size: 14px; line-height: 1.6; list-style-position: inside; font-weight: 500;">
-                <li>Built entirely in C++</li>
-                <li>Implements binary search algorithms</li>
-                <li>Uses decision trees to guess numbers</li>
-                <li>Custom terminal-based logic</li>
-            </ul>
         </div>
-    </div>
-</div>      </div>
     </section>
 
     <!-- Resume Section -->
@@ -1092,13 +1110,19 @@
             <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.08); padding-bottom: 24px; margin-bottom: 28px;">
                 <h3 style="font-size: 32px; margin-bottom: 6px; color: #1a1a1a;">Atharv Sharma</h3>
                 <p style="font-size: 15px; font-weight: 600; color: #444; margin-bottom: 14px; letter-spacing: 0.2px;">
-                    Applied Machine Learning Engineer <span style="color: #999;">•</span> B.Tech 2028 <span style="color: #999;">•</span> GSSoC’26 #1039 <span style="color: #999;">•</span> Kaggle Peak Rating 1800
+                    Applied Machine Learning Engineer <span style="color: #999;">•</span> B.Tech 2028 <span
+                        style="color: #999;">•</span> GSSoC’26 #1039 <span style="color: #999;">•</span> Kaggle Peak
+                    Rating 1800
                 </p>
                 <div style="display: flex; flex-wrap: wrap; gap: 16px 24px; font-size: 14px; color: #555;">
-                    <span>📧 <a href="mailto:atharvs278@gmail.com" style="color: inherit; text-decoration: none;">atharvs278@gmail.com</a></span>
-                    <span>📞 <a href="tel:+917400941247" style="color: inherit; text-decoration: none;">+91 7400941247</a></span>
-                    <span>🌐 <a href="https://linkedin.com/in/eguckt/" target="_blank" style="color: #1a1a1a; font-weight: 500; text-decoration: none;">LinkedIn</a></span>
-                    <span>💻 <a href="https://github.com/EGUCKT" target="_blank" style="color: #1a1a1a; font-weight: 500; text-decoration: none;">GitHub</a></span>
+                    <span>📧 <a href="mailto:atharvs278@gmail.com"
+                            style="color: inherit; text-decoration: none;">atharvs278@gmail.com</a></span>
+                    <span>📞 <a href="tel:+917400941247" style="color: inherit; text-decoration: none;">+91
+                            7400941247</a></span>
+                    <span>🌐 <a href="https://linkedin.com/in/eguckt/" target="_blank"
+                            style="color: #1a1a1a; font-weight: 500; text-decoration: none;">LinkedIn</a></span>
+                    <span>💻 <a href="https://github.com/EGUCKT" target="_blank"
+                            style="color: #1a1a1a; font-weight: 500; text-decoration: none;">GitHub</a></span>
                     <span>📍 Indore, MP, India</span>
                 </div>
             </div>
@@ -1108,32 +1132,47 @@
                 <div>
                     <h4 style="font-size: 20px; margin-bottom: 10px; color: #1a1a1a;">Professional Summary</h4>
                     <p style="color: #555; line-height: 1.65; margin-bottom: 28px; font-size: 14.5px;">
-                        Third-year B.Tech student specializing in AI & ML (Expected 2028), with hands-on experience building and deploying ML-powered applications across computer vision, NLP, and geospatial domains. Contributed to open-source AI tooling through GSSoC’26 and ECSoC’26, and competed in Kaggle’s Multi-AI Security Competition (Peak Rating 1800). Decent foundation in Python, data science libraries, and mathematical principles underpinning modern ML.
+                        Third-year B.Tech student specializing in AI & ML (Expected 2028), with hands-on experience
+                        building and deploying ML-powered applications across computer vision, NLP, and geospatial
+                        domains. Contributed to open-source AI tooling through GSSoC’26 and ECSoC’26, and competed in
+                        Kaggle’s Multi-AI Security Competition (Peak Rating 1800). Decent foundation in Python, data
+                        science libraries, and mathematical principles underpinning modern ML.
                     </p>
 
                     <h4 style="font-size: 20px; margin-bottom: 16px; color: #1a1a1a;">Work Experience</h4>
-                    
+
                     <div style="margin-bottom: 22px;">
-                        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px; margin-bottom: 4px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px; margin-bottom: 4px;">
                             <strong style="color: #1a1a1a; font-size: 15px;">AI Track Contributor</strong>
                             <span style="font-size: 13px; color: #777;">Aug 2026 – Present</span>
                         </div>
-                        <p style="font-size: 13.5px; color: #555; margin-bottom: 6px;">GirlScript Summer of Code (GSSoC’26) <span style="color: #999;">•</span> Remote (Part-time)</p>
-                        <ul style="color: #555; font-size: 13.5px; line-height: 1.6; list-style-position: inside; margin-left: 2px;">
-                            <li>Built and deployed an AI agent that aggregates localized agricultural market data to serve real-time crop pricing across major Indian cities; contributed as part of the AI track.</li>
+                        <p style="font-size: 13.5px; color: #555; margin-bottom: 6px;">GirlScript Summer of Code
+                            (GSSoC’26) <span style="color: #999;">•</span> Remote (Part-time)</p>
+                        <ul
+                            style="color: #555; font-size: 13.5px; line-height: 1.6; list-style-position: inside; margin-left: 2px;">
+                            <li>Built and deployed an AI agent that aggregates localized agricultural market data to
+                                serve real-time crop pricing across major Indian cities; contributed as part of the AI
+                                track.</li>
                             <li>Ranked #1039 globally across all GSSoC’26 contributors.</li>
                         </ul>
                     </div>
 
                     <div style="margin-bottom: 10px;">
-                        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px; margin-bottom: 4px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px; margin-bottom: 4px;">
                             <strong style="color: #1a1a1a; font-size: 15px;">Open Source Contributor</strong>
                             <span style="font-size: 13px; color: #777;">Jul 2026 – Present</span>
                         </div>
-                        <p style="font-size: 13.5px; color: #555; margin-bottom: 6px;">Elite Coders (ECSoC’26) <span style="color: #999;">•</span> Remote (Part-time)</p>
-                        <ul style="color: #555; font-size: 13.5px; line-height: 1.6; list-style-position: inside; margin-left: 2px;">
-                            <li>Built an AI-powered Code Inspector and Refactoring Engine for the Monaco-based SkillVerse coding playground — integrated time/space complexity analysis, optimization hints, and anti-pattern detection using OpenRouter/Gemini APIs.</li>
-                            <li>Feature #365 merged at Level 3 contribution; ranked #487 globally. (Stack: React, TypeScript, Tailwind CSS, Monaco Editor, Framer Motion)</li>
+                        <p style="font-size: 13.5px; color: #555; margin-bottom: 6px;">Elite Coders (ECSoC’26) <span
+                                style="color: #999;">•</span> Remote (Part-time)</p>
+                        <ul
+                            style="color: #555; font-size: 13.5px; line-height: 1.6; list-style-position: inside; margin-left: 2px;">
+                            <li>Built an AI-powered Code Inspector and Refactoring Engine for the Monaco-based
+                                SkillVerse coding playground — integrated time/space complexity analysis, optimization
+                                hints, and anti-pattern detection using OpenRouter/Gemini APIs.</li>
+                            <li>Feature #365 merged at Level 3 contribution; ranked #487 globally. (Stack: React,
+                                TypeScript, Tailwind CSS, Monaco Editor, Framer Motion)</li>
                         </ul>
                     </div>
                 </div>
@@ -1141,11 +1180,15 @@
                 <!-- Right Column: Technical Skills, Education, Certifications & Achievements -->
                 <div>
                     <h4 style="font-size: 20px; margin-bottom: 12px; color: #1a1a1a;">Technical Skills</h4>
-                    <ul style="color: #555; line-height: 1.8; list-style-position: inside; font-size: 14px; margin-bottom: 28px;">
+                    <ul
+                        style="color: #555; line-height: 1.8; list-style-position: inside; font-size: 14px; margin-bottom: 28px;">
                         <li><strong>Languages:</strong> Python, HTML, CSS</li>
-                        <li><strong>ML & Data:</strong> TensorFlow, Scikit-Learn, XGBoost, DeepFace, NumPy, Pandas, Matplotlib, OpenCV</li>
-                        <li><strong>Concepts:</strong> Supervised Learning, Classification & Regression, CNNs, Decision Trees, Spatial Data</li>
-                        <li><strong>Tools & Frameworks:</strong> FastAPI, Flask, React, Tailwind CSS, PostGIS, Android Studio, Git/GitHub</li>
+                        <li><strong>ML & Data:</strong> TensorFlow, Scikit-Learn, XGBoost, DeepFace, NumPy, Pandas,
+                            Matplotlib, OpenCV</li>
+                        <li><strong>Concepts:</strong> Supervised Learning, Classification & Regression, CNNs, Decision
+                            Trees, Spatial Data</li>
+                        <li><strong>Tools & Frameworks:</strong> FastAPI, Flask, React, Tailwind CSS, PostGIS, Android
+                            Studio, Git/GitHub</li>
                     </ul>
 
                     <h4 style="font-size: 20px; margin-bottom: 12px; color: #1a1a1a;">Education</h4>
@@ -1154,7 +1197,8 @@
                             B.Tech in Artificial Intelligence & Machine Learning
                         </p>
                         <p style="color: #666; font-size: 13.5px; line-height: 1.5;">
-                            Sushila Devi Bansal College of Engineering, Indore <span style="color: #999;">•</span> 2024 – 2028
+                            Sushila Devi Bansal College of Engineering, Indore <span style="color: #999;">•</span> 2024
+                            – 2028
                         </p>
                     </div>
                     <div style="margin-bottom: 28px;">
@@ -1168,9 +1212,11 @@
 
                     <h4 style="font-size: 20px; margin-bottom: 12px; color: #1a1a1a;">Certifications & Achievements</h4>
                     <ul style="color: #555; line-height: 1.7; list-style-position: inside; font-size: 13.5px;">
-                        <li><strong>GSSoC’26 AI Track:</strong> Peak Global Rank #1039 | <strong>ECSoC’26:</strong> Peak Global Rank #487</li>
+                        <li><strong>GSSoC’26 AI Track:</strong> Peak Global Rank #1039 | <strong>ECSoC’26:</strong> Peak
+                            Global Rank #487</li>
                         <li><strong>Kaggle Multi-AI Security Competition:</strong> Peak Rating 1800</li>
-                        <li><strong>Google Cloud:</strong> Generative AI with Vertex AI — Generative Models & Prompting Fundamentals</li>
+                        <li><strong>Google Cloud:</strong> Generative AI with Vertex AI — Generative Models & Prompting
+                            Fundamentals</li>
                         <li><strong>NPTEL:</strong> Leadership & Team Effectiveness — Elite Certificate</li>
                         <li><strong>Microsoft / LinkedIn:</strong> AI Fundamentals & Machine Learning for Beginners</li>
                         <li><strong>Duolingo:</strong> 530+ Days Japanese Streak</li>
@@ -1395,8 +1441,7 @@
         </div>
 
         <div class="social-icons">
-            <a href="https://www.linkedin.com/in/eguckt/" target="_blank" title="LinkedIn"
-                class="social-linkedin">
+            <a href="https://www.linkedin.com/in/eguckt/" target="_blank" title="LinkedIn" class="social-linkedin">
                 <img src="Images/linkedin.png" alt="LinkedIn" onerror="this.parentElement.style.display='none'">
             </a>
             <a href="https://discord.com/users/1274610788509945857/" target="_blank" title="Discord"
@@ -1482,46 +1527,46 @@
             });
         }, { passive: true });
 
-    // Initialize GlassSurface displacement filter for Nav Dock
-    (function initGlassSurfaceNav() {
-        const dock = document.getElementById('navDock');
-        if (!dock) return;
+        // Initialize GlassSurface displacement filter for Nav Dock
+        (function initGlassSurfaceNav() {
+            const dock = document.getElementById('navDock');
+            if (!dock) return;
 
-        const filterId = 'glass-filter-nav';
-        const feImage = document.getElementById('fe-image-map');
+            const filterId = 'glass-filter-nav';
+            const feImage = document.getElementById('fe-image-map');
 
-        const isWebkit = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
-        const isFirefox = /Firefox/.test(navigator.userAgent);
-        let svgSupported = !isWebkit && !isFirefox;
+            const isWebkit = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+            const isFirefox = /Firefox/.test(navigator.userAgent);
+            let svgSupported = !isWebkit && !isFirefox;
 
-        if (svgSupported) {
-            const testDiv = document.createElement('div');
-            testDiv.style.backdropFilter = `url(#${filterId})`;
-            if (!testDiv.style.backdropFilter || testDiv.style.backdropFilter === '') {
-                svgSupported = false;
+            if (svgSupported) {
+                const testDiv = document.createElement('div');
+                testDiv.style.backdropFilter = `url(#${filterId})`;
+                if (!testDiv.style.backdropFilter || testDiv.style.backdropFilter === '') {
+                    svgSupported = false;
+                }
             }
-        }
 
-        if (svgSupported) {
-            dock.classList.add('glass-surface--svg');
-            dock.classList.remove('glass-surface--fallback');
-        } else {
-            dock.classList.add('glass-surface--fallback');
-            dock.classList.remove('glass-surface--svg');
-        }
+            if (svgSupported) {
+                dock.classList.add('glass-surface--svg');
+                dock.classList.remove('glass-surface--fallback');
+            } else {
+                dock.classList.add('glass-surface--fallback');
+                dock.classList.remove('glass-surface--svg');
+            }
 
-        function updateDisplacementMap() {
-            const rect = dock.getBoundingClientRect();
-            const actualWidth = Math.max(10, Math.round(rect.width || 340));
-            const actualHeight = Math.max(10, Math.round(rect.height || 60));
-            const borderWidth = 0.07;
-            const borderRadius = Math.round(actualHeight / 2);
-            const blur = 11;
-            const brightness = 50;
-            const opacity = 0.93;
-            const edgeSize = Math.min(actualWidth, actualHeight) * (borderWidth * 0.5);
+            function updateDisplacementMap() {
+                const rect = dock.getBoundingClientRect();
+                const actualWidth = Math.max(10, Math.round(rect.width || 340));
+                const actualHeight = Math.max(10, Math.round(rect.height || 60));
+                const borderWidth = 0.07;
+                const borderRadius = Math.round(actualHeight / 2);
+                const blur = 11;
+                const brightness = 50;
+                const opacity = 0.93;
+                const edgeSize = Math.min(actualWidth, actualHeight) * (borderWidth * 0.5);
 
-            const svgContent = `
+                const svgContent = `
               <svg width="${actualWidth}" height="${actualHeight}" viewBox="0 0 ${actualWidth} ${actualHeight}" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="red-grad-nav" x1="100%" y1="0%" x2="0%" y2="0%">
@@ -1543,204 +1588,204 @@
               </svg>
             `;
 
-            if (feImage) {
-                feImage.setAttribute('href', `data:image/svg+xml,${encodeURIComponent(svgContent)}`);
+                if (feImage) {
+                    feImage.setAttribute('href', `data:image/svg+xml,${encodeURIComponent(svgContent)}`);
+                }
             }
-        }
 
-        updateDisplacementMap();
-        window.addEventListener('resize', updateDisplacementMap);
-    })();
+            updateDisplacementMap();
+            window.addEventListener('resize', updateDisplacementMap);
+        })();
 
-    // Smooth macOS-style Horizontal Expansion, Magnification, and Physics-Based Hop for Dock
-    (function initDockMagnification() {
-        const dock = document.getElementById('navDock');
-        if (!dock) return;
-        const items = Array.from(dock.querySelectorAll('.nav-item'));
-        if (!items.length) return;
+        // Smooth macOS-style Horizontal Expansion, Magnification, and Physics-Based Hop for Dock
+        (function initDockMagnification() {
+            const dock = document.getElementById('navDock');
+            if (!dock) return;
+            const items = Array.from(dock.querySelectorAll('.nav-item'));
+            if (!items.length) return;
 
-        const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-        if (!hasHover) return;
+            const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+            if (!hasHover) return;
 
-        const gap = 10;
-        const distance = 160; // Influence distance in px
-        const maxExpansionRatio = 0.40; // Expand width up to 40%
-        const maxHoverLift = 8; // Upward translation in px during hover
-        const maxScale = 1.05; // Subtle inner scale boost
+            const gap = 10;
+            const distance = 160; // Influence distance in px
+            const maxExpansionRatio = 0.40; // Expand width up to 40%
+            const maxHoverLift = 8; // Upward translation in px during hover
+            const maxScale = 1.05; // Subtle inner scale boost
 
-        let spans = [];
-        let rest = [];
-        let state = [];
-        let rafId = null;
-        let lastTime = performance.now();
-        let pointer = { x: 0, y: 0, inside: false };
-        let clickCooldownUntil = 0;
-        let dockRect = null;
+            let spans = [];
+            let rest = [];
+            let state = [];
+            let rafId = null;
+            let lastTime = performance.now();
+            let pointer = { x: 0, y: 0, inside: false };
+            let clickCooldownUntil = 0;
+            let dockRect = null;
 
-        function updateDockBounds() {
-            dockRect = dock.getBoundingClientRect();
-        }
+            function updateDockBounds() {
+                dockRect = dock.getBoundingClientRect();
+            }
 
-        function measure() {
-            // Reset widths to measure natural content dimensions
-            items.forEach(item => {
-                item.style.width = '';
-            });
-            spans = items.map(item => Math.max(78, Math.round(item.getBoundingClientRect().width)));
+            function measure() {
+                // Reset widths to measure natural content dimensions
+                items.forEach(item => {
+                    item.style.width = '';
+                });
+                spans = items.map(item => Math.max(78, Math.round(item.getBoundingClientRect().width)));
 
-            // Compute resting center offsets relative to dock center
-            const totalSpan = spans.reduce((sum, s) => sum + s, 0) + gap * (spans.length - 1);
-            let cursor = -totalSpan / 2;
-            rest = spans.map(s => {
-                const middle = cursor + s / 2;
-                cursor += s + gap;
-                return middle;
-            });
+                // Compute resting center offsets relative to dock center
+                const totalSpan = spans.reduce((sum, s) => sum + s, 0) + gap * (spans.length - 1);
+                let cursor = -totalSpan / 2;
+                rest = spans.map(s => {
+                    const middle = cursor + s / 2;
+                    cursor += s + gap;
+                    return middle;
+                });
 
-            // Initialize smooth state for each item
-            state = spans.map((s, i) => ({
-                baseWidth: s,
-                width: state[i] ? state[i].width : s,
-                targetWidth: s,
+                // Initialize smooth state for each item
+                state = spans.map((s, i) => ({
+                    baseWidth: s,
+                    width: state[i] ? state[i].width : s,
+                    targetWidth: s,
 
-                hoverLift: state[i] ? state[i].hoverLift : 0,
-                targetHoverLift: 0,
+                    hoverLift: state[i] ? state[i].hoverLift : 0,
+                    targetHoverLift: 0,
 
-                scale: state[i] ? state[i].scale : 1,
-                targetScale: 1
-            }));
+                    scale: state[i] ? state[i].scale : 1,
+                    targetScale: 1
+                }));
 
-            // Set base inline widths so layout starts at exact measured size
-            items.forEach((item, i) => {
-                item.style.width = `${state[i].width.toFixed(1)}px`;
-            });
+                // Set base inline widths so layout starts at exact measured size
+                items.forEach((item, i) => {
+                    item.style.width = `${state[i].width.toFixed(1)}px`;
+                });
 
-            updateDockBounds();
-        }
+                updateDockBounds();
+            }
 
-        // Measure on fonts ready and window resize
-        if (document.fonts && document.fonts.ready) {
-            document.fonts.ready.then(measure);
-        } else {
-            setTimeout(measure, 150);
-        }
-        window.addEventListener('resize', measure);
-        window.addEventListener('scroll', updateDockBounds, { passive: true });
+            // Measure on fonts ready and window resize
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(measure);
+            } else {
+                setTimeout(measure, 150);
+            }
+            window.addEventListener('resize', measure);
+            window.addEventListener('scroll', updateDockBounds, { passive: true });
 
-        function tick() {
-            let moving = false;
-            const now = performance.now();
-            lastTime = now;
+            function tick() {
+                let moving = false;
+                const now = performance.now();
+                lastTime = now;
 
-            for (let i = 0; i < items.length; i++) {
-                const st = state[i];
+                for (let i = 0; i < items.length; i++) {
+                    const st = state[i];
 
-                // Buttery-smooth, zero-lag responsive lerp for hover expansion and lift
-                const dw = st.targetWidth - st.width;
-                const dl = st.targetHoverLift - st.hoverLift;
-                const ds = st.targetScale - st.scale;
+                    // Buttery-smooth, zero-lag responsive lerp for hover expansion and lift
+                    const dw = st.targetWidth - st.width;
+                    const dl = st.targetHoverLift - st.hoverLift;
+                    const ds = st.targetScale - st.scale;
 
-                if (Math.abs(dw) > 0.08 || Math.abs(dl) > 0.08 || Math.abs(ds) > 0.002) {
-                    moving = true;
-                    st.width += dw * 0.24;
-                    st.hoverLift += dl * 0.24;
-                    st.scale += ds * 0.24;
-                } else {
-                    st.width = st.targetWidth;
-                    st.hoverLift = st.targetHoverLift;
-                    st.scale = st.targetScale;
+                    if (Math.abs(dw) > 0.05 || Math.abs(dl) > 0.05 || Math.abs(ds) > 0.001) {
+                        moving = true;
+                        st.width += dw * 0.14;
+                        st.hoverLift += dl * 0.14;
+                        st.scale += ds * 0.14;
+                    } else {
+                        st.width = st.targetWidth;
+                        st.hoverLift = st.targetHoverLift;
+                        st.scale = st.targetScale;
+                    }
+
+                    items[i].style.width = `${st.width.toFixed(1)}px`;
+                    items[i].style.transform = `translateY(${-st.hoverLift.toFixed(2)}px) scale(${st.scale.toFixed(3)})`;
                 }
 
-                items[i].style.width = `${st.width.toFixed(1)}px`;
-                items[i].style.transform = `translateY(${-st.hoverLift.toFixed(2)}px) scale(${st.scale.toFixed(3)})`;
+                if (moving) {
+                    rafId = requestAnimationFrame(tick);
+                } else {
+                    rafId = null;
+                }
             }
 
-            if (moving) {
-                rafId = requestAnimationFrame(tick);
-            } else {
-                rafId = null;
-            }
-        }
-
-        function wake() {
-            lastTime = performance.now();
-            if (!rafId) {
-                rafId = requestAnimationFrame(tick);
-            }
-        }
-
-        function onMove(e) {
-            if (Date.now() < clickCooldownUntil) return;
-            pointer.x = e.clientX;
-            pointer.y = e.clientY;
-            pointer.inside = true;
-
-            if (!dockRect) updateDockBounds();
-            const center = dockRect.left + dockRect.width / 2;
-            const focus = pointer.x - center;
-
-            for (let i = 0; i < items.length; i++) {
-                const dist = Math.abs(focus - rest[i]);
-                const reach = dist / distance;
-                const curve = reach < 1 ? Math.pow(Math.cos((reach * Math.PI) / 2), 2) : 0;
-
-                state[i].targetWidth = spans[i] * (1 + maxExpansionRatio * curve);
-                state[i].targetHoverLift = maxHoverLift * curve;
-                state[i].targetScale = 1 + (maxScale - 1) * curve;
+            function wake() {
+                lastTime = performance.now();
+                if (!rafId) {
+                    rafId = requestAnimationFrame(tick);
+                }
             }
 
-            wake();
-        }
+            function onMove(e) {
+                if (Date.now() < clickCooldownUntil) return;
+                pointer.x = e.clientX;
+                pointer.y = e.clientY;
+                pointer.inside = true;
 
-        function onLeave() {
-            pointer.inside = false;
-            for (let i = 0; i < items.length; i++) {
-                state[i].targetWidth = spans[i];
-                state[i].targetHoverLift = 0;
-                state[i].targetScale = 1;
+                if (!dockRect) updateDockBounds();
+                const center = dockRect.left + dockRect.width / 2;
+                const focus = pointer.x - center;
+
+                for (let i = 0; i < items.length; i++) {
+                    const dist = Math.abs(focus - rest[i]);
+                    const reach = dist / distance;
+                    const curve = reach < 1 ? Math.pow(Math.cos((reach * Math.PI) / 2), 2) : 0;
+
+                    state[i].targetWidth = spans[i] * (1 + maxExpansionRatio * curve);
+                    state[i].targetHoverLift = maxHoverLift * curve;
+                    state[i].targetScale = 1 + (maxScale - 1) * curve;
+                }
+
+                wake();
             }
-            wake();
-        }
 
-        dock.addEventListener('pointerenter', () => {
-            updateDockBounds();
-        });
-        dock.addEventListener('pointermove', onMove);
-        dock.addEventListener('pointerleave', onLeave);
-        dock.addEventListener('pointercancel', onLeave);
+            function onLeave() {
+                pointer.inside = false;
+                for (let i = 0; i < items.length; i++) {
+                    state[i].targetWidth = spans[i];
+                    state[i].targetHoverLift = 0;
+                    state[i].targetScale = 1;
+                }
+                wake();
+            }
 
-        // Immediate hover reset on click
-        items.forEach((item) => {
-            item.addEventListener('click', () => {
-                // Short cooldown prevents hover re-activation while smooth-scrolling away
-                clickCooldownUntil = Date.now() + 500;
-
-                // Instantly reset target dimensions so dock contracts to resting state
-                onLeave();
-
-                // Remove focus to prevent sticky focus rings
-                item.blur();
+            dock.addEventListener('pointerenter', () => {
+                updateDockBounds();
             });
-        });
+            dock.addEventListener('pointermove', onMove);
+            dock.addEventListener('pointerleave', onLeave);
+            dock.addEventListener('pointercancel', onLeave);
 
-        // Global scroll resets hover state immediately (e.g., during smooth scrolling)
-        window.addEventListener('scroll', onLeave, { passive: true });
+            // Immediate hover reset on click
+            items.forEach((item) => {
+                item.addEventListener('click', () => {
+                    // Short cooldown prevents hover re-activation while smooth-scrolling away
+                    clickCooldownUntil = Date.now() + 500;
 
-        // Global pointer listener: if cursor is anywhere outside the dock, force unhover immediately with zero layout thrash
-        window.addEventListener('pointermove', (e) => {
-            if (!pointer.inside || Date.now() < clickCooldownUntil) return;
-            if (!dockRect) updateDockBounds();
-            if (
-                e.clientX < dockRect.left ||
-                e.clientX > dockRect.right ||
-                e.clientY < dockRect.top ||
-                e.clientY > dockRect.bottom
-            ) {
-                onLeave();
-            }
-        }, { passive: true });
-    })();
-</script>
+                    // Instantly reset target dimensions so dock contracts to resting state
+                    onLeave();
+
+                    // Remove focus to prevent sticky focus rings
+                    item.blur();
+                });
+            });
+
+            // Global scroll resets hover state immediately (e.g., during smooth scrolling)
+            window.addEventListener('scroll', onLeave, { passive: true });
+
+            // Global pointer listener: if cursor is anywhere outside the dock, force unhover immediately with zero layout thrash
+            window.addEventListener('pointermove', (e) => {
+                if (!pointer.inside || Date.now() < clickCooldownUntil) return;
+                if (!dockRect) updateDockBounds();
+                if (
+                    e.clientX < dockRect.left ||
+                    e.clientX > dockRect.right ||
+                    e.clientY < dockRect.top ||
+                    e.clientY > dockRect.bottom
+                ) {
+                    onLeave();
+                }
+            }, { passive: true });
+        })();
+    </script>
     <div style="display:none;">
         This is the official portfolio of EGUCKT (Atharv Sharma), B.Tech CSE-AIML student from Mhow, India.
         Unique identifiers for search engines:
