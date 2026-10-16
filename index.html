@@ -72,62 +72,202 @@
             pointer-events: none;
         }
 
-        /* 3D Floating Navigation Dock */
-        .nav-dock {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #fcfcfd 0%, #f8f8fa 15%, #f3f4f6 30%, #eeeff2 45%, #e9eaed 60%, #e4e5e8 75%, #dee0e3 90%, #e2e3e6 100%);
-            padding: 16px 24px;
-            border-radius: 50px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12),
-                0 8px 16px rgba(0, 0, 0, 0.10),
-                0 16px 32px rgba(0, 0, 0, 0.08),
-                inset 0 2px 1px rgba(255, 255, 255, 0.7),
-                inset 0 -2px 6px rgba(0, 0, 0, 0.10);
-            z-index: 1000;
-            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            overflow: hidden;
+        /* GlassSurface 3D Floating Navigation Dock */
+        .nav-dock.glass-surface {
+            position: fixed !important;
+            bottom: 24px !important;
+            top: auto !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: max-content !important;
+            max-width: calc(100vw - 32px) !important;
+            height: 64px !important;
+            border-radius: 9999px !important;
+            z-index: 1000 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            overflow: visible !important;
+            padding: 6px 10px !important;
+            box-sizing: border-box !important;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease !important;
+            --glass-frost: 0.1;
+            --glass-saturation: 1.2;
+            --filter-id: url(#glass-filter-nav);
         }
 
-        .nav-dock:hover {
-            padding: 16px 32px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08),
-                0 6px 12px rgba(0, 0, 0, 0.12),
-                0 12px 24px rgba(0, 0, 0, 0.14),
-                inset 0 2px 2px rgba(255, 255, 255, 0.8),
-                inset 0 -3px 8px rgba(0, 0, 0, 0.12);
+        .nav-dock.glass-surface:hover {
+            transform: translateX(-50%) translateY(-2px) !important;
+        }
+
+        .glass-surface {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .glass-surface__filter {
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .glass-surface__content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            gap: 10px;
+            border-radius: inherit;
+            position: relative;
+            z-index: 2;
+        }
+
+        .glass-surface--svg {
+            background: rgba(255, 255, 255, 0.12);
+            background: light-dark(hsl(0 0% 100% / var(--glass-frost, 0.1)), hsl(0 0% 0% / var(--glass-frost, 0.1)));
+            -webkit-backdrop-filter: var(--filter-id) saturate(var(--glass-saturation, 1.2));
+            backdrop-filter: var(--filter-id) saturate(var(--glass-saturation, 1.2));
+            box-shadow:
+                0 0 2px 1px rgba(0, 0, 0, 0.12) inset,
+                0 0 10px 4px rgba(0, 0, 0, 0.08) inset,
+                0px 4px 16px rgba(17, 17, 26, 0.05),
+                0px 8px 24px rgba(17, 17, 26, 0.05),
+                0px 16px 56px rgba(17, 17, 26, 0.05),
+                0px 4px 16px rgba(17, 17, 26, 0.05) inset,
+                0px 8px 24px rgba(17, 17, 26, 0.05) inset,
+                0px 16px 56px rgba(17, 17, 26, 0.05) inset;
+        }
+
+        .glass-surface--fallback {
+            background: rgba(255, 255, 255, 0.22);
+            background: light-dark(
+                hsl(0 0% 100% / calc(0.12 + var(--glass-frost, 0.1) * 0.5)),
+                hsl(0 0% 100% / calc(0.04 + var(--glass-frost, 0.1) * 0.3))
+            );
+            -webkit-backdrop-filter: blur(14px) saturate(calc(var(--glass-saturation, 1.2) * 1.4)) brightness(1.05);
+            backdrop-filter: blur(14px) saturate(calc(var(--glass-saturation, 1.2) * 1.4)) brightness(1.05);
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.85),
+                inset 0 -1px 0 0 rgba(255, 255, 255, 0.35),
+                0 0 2px 1px rgba(0, 0, 0, 0.1) inset,
+                0 0 12px 3px rgba(255, 255, 255, 0.72) inset,
+                0px 4px 16px rgba(17, 17, 26, 0.06),
+                0px 8px 24px rgba(17, 17, 26, 0.06),
+                0px 16px 56px rgba(17, 17, 26, 0.06);
+        }
+
+        .glass-surface__sheen,
+        .glass-surface__rim {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glass-surface__sheen {
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.45) 0%,
+                transparent 42%,
+                transparent 64%,
+                rgba(255, 255, 255, 0.18) 100%
+            );
+        }
+
+        .glass-surface__rim {
+            padding: 2.5px;
+            box-sizing: border-box;
+            background: linear-gradient(
+                150deg,
+                rgba(255, 255, 255, 0.75),
+                rgba(255, 255, 255, 0.15) 45%,
+                rgba(255, 255, 255, 0.08) 60%,
+                rgba(255, 255, 255, 0.45)
+            );
+            -webkit-mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask:
+                linear-gradient(#000 0 0) content-box exclude,
+                linear-gradient(#000 0 0);
         }
 
         .nav-item {
-            color: #656565;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 510;
-            padding: 10px 16px;
-            border-radius: 8px;
-            transition: all 0.25s ease;
-            letter-spacing: 0.45px;
-            white-space: nowrap;
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.22), 0 -1px 0 rgba(255, 255, 255, 0.65);
-            position: relative;
-            cursor: pointer;
-        }
-
-        .nav-item.active {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 48px;
+            padding: 0 16px;
+            border-radius: 9999px;
             color: #1a1a1a;
-            font-weight: 680;
-            transform: translateY(-1.5px);
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 -1px 0 rgba(255, 255, 255, 0.8);
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.25px;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.68);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.04),
+                inset 0 1px 1.5px rgba(255, 255, 255, 0.95),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+            transition:
+                background 0.22s ease,
+                color 0.22s ease,
+                box-shadow 0.22s ease;
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+            white-space: nowrap;
+            transform-origin: center bottom;
+            will-change: width, transform;
+            box-sizing: border-box;
+            z-index: 3;
         }
 
         .nav-item:hover {
-            color: #3a3a3a;
-            transform: translateY(-0.5px);
+            color: #000000;
+            background: rgba(255, 255, 255, 0.88);
+            box-shadow:
+                0 4px 14px rgba(0, 0, 0, 0.07),
+                inset 0 1px 1.5px #ffffff,
+                inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-item.active {
+            color: #000000;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow:
+                0 4px 16px rgba(0, 0, 0, 0.09),
+                inset 0 1px 1.5px #ffffff,
+                inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #111111;
+        }
+
+        .nav-item:active {
+            filter: brightness(0.9);
         }
 
         /* Sections */
@@ -561,18 +701,22 @@
                 font-size: 36px;
             }
 
-            .nav-dock {
-                flex-wrap: nowrap;
-                justify-content: center;
-                bottom: 10px;
-                padding: 8px 16px;
-                max-width: 95%;
-                gap: 8px;
+            .nav-dock.glass-surface {
+                bottom: 12px !important;
+                height: 52px !important;
+                padding: 4px 6px !important;
+                max-width: calc(100vw - 20px) !important;
+            }
+
+            .glass-surface__content {
+                padding: 0 2px;
+                gap: 6px;
             }
 
             .nav-item {
-                font-size: 12px;
-                padding: 6px 10px;
+                height: 38px;
+                font-size: 13px;
+                padding: 0 12px;
             }
 
             .projects-grid,
@@ -715,12 +859,47 @@
 
 <body>
 
-    <!-- 3D Navigation Dock -->
-    <nav class="nav-dock">
-        <a href="#home" class="nav-item active" data-section="home">Home</a>
-        <a href="#projects" class="nav-item" data-section="projects">Projects</a>
-        <a href="#resume" class="nav-item" data-section="resume">Resume</a>
-        <a href="#about" class="nav-item" data-section="about">About</a>
+    <!-- GlassSurface 3D Floating Navigation Dock -->
+    <nav class="nav-dock glass-surface glass-surface--fallback" id="navDock">
+        <svg class="glass-surface__filter" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="glass-filter-nav" color-interpolation-filters="sRGB" x="0%" y="0%" width="100%" height="100%">
+                    <feImage id="fe-image-map" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map" />
+
+                    <feDisplacementMap id="redchannel" in="SourceGraphic" in2="map" result="dispRed" scale="-180" xChannelSelector="R" yChannelSelector="G" />
+                    <feColorMatrix in="dispRed" type="matrix" values="1 0 0 0 0
+                            0 0 0 0 0
+                            0 0 0 0 0
+                            0 0 0 1 0" result="red" />
+
+                    <feDisplacementMap id="greenchannel" in="SourceGraphic" in2="map" result="dispGreen" scale="-170" xChannelSelector="R" yChannelSelector="G" />
+                    <feColorMatrix in="dispGreen" type="matrix" values="0 0 0 0 0
+                            0 1 0 0 0
+                            0 0 0 0 0
+                            0 0 0 1 0" result="green" />
+
+                    <feDisplacementMap id="bluechannel" in="SourceGraphic" in2="map" result="dispBlue" scale="-160" xChannelSelector="R" yChannelSelector="G" />
+                    <feColorMatrix in="dispBlue" type="matrix" values="0 0 0 0 0
+                            0 0 0 0 0
+                            0 0 1 0 0
+                            0 0 0 1 0" result="blue" />
+
+                    <feBlend in="red" in2="green" mode="screen" result="rg" />
+                    <feBlend in="rg" in2="blue" mode="screen" result="output" />
+                    <feGaussianBlur id="gaussian-blur-displace" in="output" stdDeviation="0.5" />
+                </filter>
+            </defs>
+        </svg>
+
+        <span class="glass-surface__sheen" aria-hidden="true"></span>
+        <span class="glass-surface__rim" aria-hidden="true"></span>
+
+        <div class="glass-surface__content">
+            <a href="#home" class="nav-item active" data-section="home">Home</a>
+            <a href="#projects" class="nav-item" data-section="projects">Projects</a>
+            <a href="#resume" class="nav-item" data-section="resume">Resume</a>
+            <a href="#about" class="nav-item" data-section="about">About</a>
+        </div>
     </nav>
 
     <!-- Home Section -->
@@ -1239,34 +1418,57 @@
     </footer>
 
     <script>
-        // Smooth scroll and active state management
+        // Smooth scroll and active state management with immediate compositor-driven hop
+        let isNavScrolling = false;
+        let navScrollTimer = null;
+
+        const HOP_FRAMES = [0, -4.99, -9.51, -13.54, -17.09, -20.17, -22.76, -24.87, -26.5, -27.66, -28.33, -28.52, -28.23, -27.46, -26.22, -24.49, -22.28, -19.59, -16.42, -12.77, -8.64, -4.03, 0, -1.35, -2.22, -2.62, -2.53, -1.96, -0.91, 0];
+        const MAC_HOP_KEYFRAMES = HOP_FRAMES.map(y => ({ transform: `translateY(${y}px)` }));
+
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function (e) {
                 e.preventDefault();
 
-                // Remove active class from all items
+                // Lock active state to prevent scroll event from flickering intermediate sections
+                isNavScrolling = true;
+                clearTimeout(navScrollTimer);
+                navScrollTimer = setTimeout(() => {
+                    isNavScrolling = false;
+                }, 850);
+
+                // Instantly set active class on clicked item
                 document.querySelectorAll('.nav-item').forEach(nav => {
                     nav.classList.remove('active');
                 });
-
-                // Add active class to clicked item
                 this.classList.add('active');
 
-                // Smooth scroll to section
+                // Trigger authentic macOS physics bounce IMMEDIATELY on click (runs on compositor, never blocked by scroll)
+                this.animate(MAC_HOP_KEYFRAMES, {
+                    duration: 480,
+                    easing: 'linear',
+                    fill: 'none'
+                });
+
+                // Smooth scroll to section after the hop has launched so the user clearly sees the click reaction
                 const targetId = this.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
-                targetSection.scrollIntoView({ behavior: 'smooth' });
+                if (targetSection) {
+                    setTimeout(() => {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }, 140);
+                }
             });
         });
 
-        // Update active nav on scroll
+        // Update active nav on manual user scroll
         window.addEventListener('scroll', () => {
+            if (isNavScrolling) return;
+
             let current = '';
             const sections = document.querySelectorAll('section');
 
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
                 if (scrollY >= (sectionTop - 200)) {
                     current = section.getAttribute('id');
                 }
@@ -1278,8 +1480,267 @@
                     item.classList.add('active');
                 }
             });
+        }, { passive: true });
+
+    // Initialize GlassSurface displacement filter for Nav Dock
+    (function initGlassSurfaceNav() {
+        const dock = document.getElementById('navDock');
+        if (!dock) return;
+
+        const filterId = 'glass-filter-nav';
+        const feImage = document.getElementById('fe-image-map');
+
+        const isWebkit = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+        const isFirefox = /Firefox/.test(navigator.userAgent);
+        let svgSupported = !isWebkit && !isFirefox;
+
+        if (svgSupported) {
+            const testDiv = document.createElement('div');
+            testDiv.style.backdropFilter = `url(#${filterId})`;
+            if (!testDiv.style.backdropFilter || testDiv.style.backdropFilter === '') {
+                svgSupported = false;
+            }
+        }
+
+        if (svgSupported) {
+            dock.classList.add('glass-surface--svg');
+            dock.classList.remove('glass-surface--fallback');
+        } else {
+            dock.classList.add('glass-surface--fallback');
+            dock.classList.remove('glass-surface--svg');
+        }
+
+        function updateDisplacementMap() {
+            const rect = dock.getBoundingClientRect();
+            const actualWidth = Math.max(10, Math.round(rect.width || 340));
+            const actualHeight = Math.max(10, Math.round(rect.height || 60));
+            const borderWidth = 0.07;
+            const borderRadius = Math.round(actualHeight / 2);
+            const blur = 11;
+            const brightness = 50;
+            const opacity = 0.93;
+            const edgeSize = Math.min(actualWidth, actualHeight) * (borderWidth * 0.5);
+
+            const svgContent = `
+              <svg width="${actualWidth}" height="${actualHeight}" viewBox="0 0 ${actualWidth} ${actualHeight}" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="red-grad-nav" x1="100%" y1="0%" x2="0%" y2="0%">
+                    <stop offset="0%" stop-color="#0000"/>
+                    <stop offset="100%" stop-color="red"/>
+                  </linearGradient>
+                  <linearGradient id="blue-grad-nav" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#0000"/>
+                    <stop offset="100%" stop-color="blue"/>
+                  </linearGradient>
+                  <filter id="soft-nav" filterUnits="userSpaceOnUse" x="0" y="0" width="${actualWidth}" height="${actualHeight}" color-interpolation-filters="sRGB">
+                    <feGaussianBlur stdDeviation="${blur}" />
+                  </filter>
+                </defs>
+                <rect x="0" y="0" width="${actualWidth}" height="${actualHeight}" fill="black"></rect>
+                <rect x="0" y="0" width="${actualWidth}" height="${actualHeight}" rx="${borderRadius}" fill="url(#red-grad-nav)" />
+                <rect x="0" y="0" width="${actualWidth}" height="${actualHeight}" rx="${borderRadius}" fill="url(#blue-grad-nav)" style="mix-blend-mode: difference" />
+                <rect x="${edgeSize}" y="${edgeSize}" width="${actualWidth - edgeSize * 2}" height="${actualHeight - edgeSize * 2}" rx="${borderRadius}" fill="hsl(0 0% ${brightness}% / ${opacity})" filter="url(#soft-nav)" />
+              </svg>
+            `;
+
+            if (feImage) {
+                feImage.setAttribute('href', `data:image/svg+xml,${encodeURIComponent(svgContent)}`);
+            }
+        }
+
+        updateDisplacementMap();
+        window.addEventListener('resize', updateDisplacementMap);
+    })();
+
+    // Smooth macOS-style Horizontal Expansion, Magnification, and Physics-Based Hop for Dock
+    (function initDockMagnification() {
+        const dock = document.getElementById('navDock');
+        if (!dock) return;
+        const items = Array.from(dock.querySelectorAll('.nav-item'));
+        if (!items.length) return;
+
+        const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (!hasHover) return;
+
+        const gap = 10;
+        const distance = 160; // Influence distance in px
+        const maxExpansionRatio = 0.40; // Expand width up to 40%
+        const maxHoverLift = 8; // Upward translation in px during hover
+        const maxScale = 1.05; // Subtle inner scale boost
+
+        let spans = [];
+        let rest = [];
+        let state = [];
+        let rafId = null;
+        let lastTime = performance.now();
+        let pointer = { x: 0, y: 0, inside: false };
+        let clickCooldownUntil = 0;
+        let dockRect = null;
+
+        function updateDockBounds() {
+            dockRect = dock.getBoundingClientRect();
+        }
+
+        function measure() {
+            // Reset widths to measure natural content dimensions
+            items.forEach(item => {
+                item.style.width = '';
+            });
+            spans = items.map(item => Math.max(78, Math.round(item.getBoundingClientRect().width)));
+
+            // Compute resting center offsets relative to dock center
+            const totalSpan = spans.reduce((sum, s) => sum + s, 0) + gap * (spans.length - 1);
+            let cursor = -totalSpan / 2;
+            rest = spans.map(s => {
+                const middle = cursor + s / 2;
+                cursor += s + gap;
+                return middle;
+            });
+
+            // Initialize smooth state for each item
+            state = spans.map((s, i) => ({
+                baseWidth: s,
+                width: state[i] ? state[i].width : s,
+                targetWidth: s,
+
+                hoverLift: state[i] ? state[i].hoverLift : 0,
+                targetHoverLift: 0,
+
+                scale: state[i] ? state[i].scale : 1,
+                targetScale: 1
+            }));
+
+            // Set base inline widths so layout starts at exact measured size
+            items.forEach((item, i) => {
+                item.style.width = `${state[i].width.toFixed(1)}px`;
+            });
+
+            updateDockBounds();
+        }
+
+        // Measure on fonts ready and window resize
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(measure);
+        } else {
+            setTimeout(measure, 150);
+        }
+        window.addEventListener('resize', measure);
+        window.addEventListener('scroll', updateDockBounds, { passive: true });
+
+        function tick() {
+            let moving = false;
+            const now = performance.now();
+            lastTime = now;
+
+            for (let i = 0; i < items.length; i++) {
+                const st = state[i];
+
+                // Buttery-smooth, zero-lag responsive lerp for hover expansion and lift
+                const dw = st.targetWidth - st.width;
+                const dl = st.targetHoverLift - st.hoverLift;
+                const ds = st.targetScale - st.scale;
+
+                if (Math.abs(dw) > 0.08 || Math.abs(dl) > 0.08 || Math.abs(ds) > 0.002) {
+                    moving = true;
+                    st.width += dw * 0.24;
+                    st.hoverLift += dl * 0.24;
+                    st.scale += ds * 0.24;
+                } else {
+                    st.width = st.targetWidth;
+                    st.hoverLift = st.targetHoverLift;
+                    st.scale = st.targetScale;
+                }
+
+                items[i].style.width = `${st.width.toFixed(1)}px`;
+                items[i].style.transform = `translateY(${-st.hoverLift.toFixed(2)}px) scale(${st.scale.toFixed(3)})`;
+            }
+
+            if (moving) {
+                rafId = requestAnimationFrame(tick);
+            } else {
+                rafId = null;
+            }
+        }
+
+        function wake() {
+            lastTime = performance.now();
+            if (!rafId) {
+                rafId = requestAnimationFrame(tick);
+            }
+        }
+
+        function onMove(e) {
+            if (Date.now() < clickCooldownUntil) return;
+            pointer.x = e.clientX;
+            pointer.y = e.clientY;
+            pointer.inside = true;
+
+            if (!dockRect) updateDockBounds();
+            const center = dockRect.left + dockRect.width / 2;
+            const focus = pointer.x - center;
+
+            for (let i = 0; i < items.length; i++) {
+                const dist = Math.abs(focus - rest[i]);
+                const reach = dist / distance;
+                const curve = reach < 1 ? Math.pow(Math.cos((reach * Math.PI) / 2), 2) : 0;
+
+                state[i].targetWidth = spans[i] * (1 + maxExpansionRatio * curve);
+                state[i].targetHoverLift = maxHoverLift * curve;
+                state[i].targetScale = 1 + (maxScale - 1) * curve;
+            }
+
+            wake();
+        }
+
+        function onLeave() {
+            pointer.inside = false;
+            for (let i = 0; i < items.length; i++) {
+                state[i].targetWidth = spans[i];
+                state[i].targetHoverLift = 0;
+                state[i].targetScale = 1;
+            }
+            wake();
+        }
+
+        dock.addEventListener('pointerenter', () => {
+            updateDockBounds();
         });
-    </script>
+        dock.addEventListener('pointermove', onMove);
+        dock.addEventListener('pointerleave', onLeave);
+        dock.addEventListener('pointercancel', onLeave);
+
+        // Immediate hover reset on click
+        items.forEach((item) => {
+            item.addEventListener('click', () => {
+                // Short cooldown prevents hover re-activation while smooth-scrolling away
+                clickCooldownUntil = Date.now() + 500;
+
+                // Instantly reset target dimensions so dock contracts to resting state
+                onLeave();
+
+                // Remove focus to prevent sticky focus rings
+                item.blur();
+            });
+        });
+
+        // Global scroll resets hover state immediately (e.g., during smooth scrolling)
+        window.addEventListener('scroll', onLeave, { passive: true });
+
+        // Global pointer listener: if cursor is anywhere outside the dock, force unhover immediately with zero layout thrash
+        window.addEventListener('pointermove', (e) => {
+            if (!pointer.inside || Date.now() < clickCooldownUntil) return;
+            if (!dockRect) updateDockBounds();
+            if (
+                e.clientX < dockRect.left ||
+                e.clientX > dockRect.right ||
+                e.clientY < dockRect.top ||
+                e.clientY > dockRect.bottom
+            ) {
+                onLeave();
+            }
+        }, { passive: true });
+    })();
+</script>
     <div style="display:none;">
         This is the official portfolio of EGUCKT (Atharv Sharma), B.Tech CSE-AIML student from Mhow, India.
         Unique identifiers for search engines:
